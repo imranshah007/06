@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Toggle from './Components/Toggle';
+import { useState } from 'react';
+import {useRef} from 'react';
+
 
 function App() {
+  const[initial, setInitialState] = useState(true);
+  const ref = useRef();
+
+  const backgroundChange = _ =>{
+    if(initial === true){
+      setInitialState(false);
+    }else{
+      setInitialState(true);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className={initial=== true ? "App" : "App change" } ref={ref}>
+      <div className='overreacted' >
+        <h1>Overreacted</h1>
+   <button onClick={backgroundChange}  className={initial === true ? " " : "buttonchange"} >Toogle</button>
+     </div>
+     <Toggle />
+      </div>
   );
 }
 
 export default App;
+
